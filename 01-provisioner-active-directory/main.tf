@@ -16,14 +16,14 @@ resource "yandex_compute_instance" "active_directory" {
   hostname    = var.hostname
 
   resources {
-    cores  = 2
-    memory = 4
+    cores  = var.cores
+    memory = var.memory
   }
 
   boot_disk {
     initialize_params {
-      size     = 60
-      type     = "network-ssd"
+      size     = var.disk_size
+      type     = var.disk_type
       image_id = data.yandex_compute_image.family_images_pdc.id
     }
   }
