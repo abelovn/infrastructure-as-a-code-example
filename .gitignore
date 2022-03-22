@@ -1,0 +1,10 @@
+### Terraform files
+**/.*.lock.hcl
+**/*.tfstate
+**/*.tfstate.backup
+**/.terraform/*
+**/.*.tfstate.lock.info
+**/*.tfvars
+**/inventory
+*/host.ini
+*/inventory.yml
