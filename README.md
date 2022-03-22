@@ -1,5 +1,5 @@
 # infrastructure-as-a-code-example
-Examples of infrastructure-as-code tools include Yandex Cloud, Terraform and Ansible.
+Examples of infrastructure as code tools include Yandex Cloud, Terraform and Ansible.
 
 ## Install YC cli
 ```
