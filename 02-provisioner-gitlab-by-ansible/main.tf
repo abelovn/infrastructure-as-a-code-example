@@ -1,5 +1,5 @@
-data "yandex_compute_image" family_images {
-  family = var.family_images_gitlab
+data "yandex_compute_image" family_images_gitlab {
+  family = var.family_images_windows
 }
 
 resource "yandex_compute_instance" "gitlab" {
@@ -17,7 +17,7 @@ resource "yandex_compute_instance" "gitlab" {
     initialize_params {
       size     = var.disk_size
       type     = var.disk_type
-      image_id = data.yandex_compute_image.family_images.id
+      image_id = data.yandex_compute_image.family_images_gitlab.id
     }
   }
 

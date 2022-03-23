@@ -19,7 +19,7 @@ variable "yc_zone" {
   default     = "ru-central1-c"
 }
 
-variable "family_images_gitlab" {
+variable "family_images_windows" {
   type        = string
   description = "Family of images gitlab in Yandex Cloud. Example: windows-2022-dc-gvlk, ubuntu-2004-lts"
 }
