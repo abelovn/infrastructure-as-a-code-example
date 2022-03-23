@@ -7,6 +7,7 @@ resource "yandex_compute_instance" "gitlab" {
   name        = "gitlab"
   platform_id = "standard-v3"
   hostname    = var.hostname
+  service_account_id = yandex_iam_service_account.sa-compute-admin.id
 
   resources {
     cores  = var.cores
