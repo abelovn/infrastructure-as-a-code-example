@@ -49,11 +49,6 @@ variable "hostname" {
   description = "hostname"
 }
 
-variable "jenkins_external_url" {
-  type        = string
-  description = "jenkins_external_url"
-}
-
 variable "domain" {
   type        = string
   description = "domain"
