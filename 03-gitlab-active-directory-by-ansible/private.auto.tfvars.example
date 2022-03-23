@@ -1,7 +1,10 @@
 yc_token         = ""
 yc_cloud_id      = ""
 yc_folder_id     = ""
-yc_zone          = ""
+yc_zone          = "ru-central1-c"
+
+family_images_windows = "windows-2022-dc-gvlk"
+family_images_linux = "ubuntu-2004-lts"
 
 windows_password = ""
 pdc_hostname         = ""

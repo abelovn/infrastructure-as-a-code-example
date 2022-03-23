@@ -1,5 +1,5 @@
-data "yandex_compute_image" "windows-2022-dc-gvlk" {
-  family = "windows-2022-dc-gvlk"
+data "yandex_compute_image" family_images_pdc {
+  family = var.family_images_windows
 }
 
 data "template_file" "userdata_win" {
@@ -24,7 +24,7 @@ resource "yandex_compute_instance" "active_directory" {
     initialize_params {
       size     = 60
       type     = "network-ssd"
-      image_id = data.yandex_compute_image.windows-2022-dc-gvlk.id
+      image_id = data.yandex_compute_image.family_images_pdc.id
     }
   }
 
@@ -62,6 +62,10 @@ data "yandex_compute_image" "ubuntu-20-04" {
   family = "ubuntu-2004-lts"
 }
 
+data "yandex_compute_image" family_images_gitlab {
+  family = var.family_images_linux
+}
+
 resource "yandex_compute_instance" "gitlab" {
 
   name        = "gitlab"
@@ -77,7 +81,7 @@ resource "yandex_compute_instance" "gitlab" {
     initialize_params {
       size     = 40
       type     = "network-ssd"
-      image_id = data.yandex_compute_image.ubuntu-20-04.id
+      image_id = data.yandex_compute_image.family_images_gitlab.id
     }
   }
 

@@ -19,6 +19,16 @@ variable "yc_zone" {
   default     = "ru-central1-c"
 }
 
+variable "family_images_windows" {
+  type        = string
+  description = "Family of images windows in Yandex Cloud. Example: windows-2022-dc-gvlk, windows-2019-dc-gvlk"
+}
+
+variable "family_images_linux" {
+  type        = string
+  description = "Family of images gitlab in Yandex Cloud. Example: ubuntu-2004-lts"
+}
+
 variable "windows_password" {
   type        = string
   description = "Password for Windows"
