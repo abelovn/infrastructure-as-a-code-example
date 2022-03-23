@@ -1,4 +1,4 @@
-- hosts: gitlab
+- hosts: jenkins
   become: yes
   pre_tasks:
     - name: Update apt cache.
