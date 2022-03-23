@@ -6,4 +6,64 @@
       when: ansible_os_family == 'Debian'
       changed_when: false
   roles:
+    - role: robertdebock.java
     - role: robertdebock.jenkins
+  post_tasks:
+    - name: get initialAdminPassword
+      shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+      register: initialAdminPassword
+
+    - name: Print initialAdminPassword var
+      debug:
+        var: initialAdminPassword['stdout']
+
+    - name: Print ansible_ssh_host var
+      debug:
+        var: ansible_ssh_host
+
+    - name: Install Plugins on behalf of jenkins user "admin"
+      jenkins_plugin:
+        name: "{{ item.key }}"
+        url: http://localhost:8080
+        url_username: "admin"
+        url_password: "{{ initialAdminPassword['stdout'] }}"
+      register: plugin_result
+      until: plugin_result is success
+      with_items: # no version = latest
+        - { key: "cloudbees-folder"}
+        - { key: "antisamy-markup-formatter"}
+        - { key: "build-timeout"}
+        - { key: "credentials-binding"}
+        - { key: "timestamper"}
+        - { key: "ws-cleanup"}
+        - { key: "ant"}
+        - { key: "gradle"}
+        - { key: "workflow-aggregator"}
+        - { key: "github-branch-source"}
+        - { key: "pipeline-github-lib"}
+        - { key: "pipeline-stage-view"}
+        - { key: "git"}
+        - { key: "ssh-slaves"}
+        - { key: "matrix-auth"}
+        - { key: "pam-auth"}
+        - { key: "ldap"}
+        - { key: "email-ext"}
+        - { key: "mailer"}
+
+    - name: Restart Jenkins
+      ansible.builtin.service:
+        name: jenkins
+        state: restarted
+
+    - name: Wait for Jenkins to start up
+      ansible.builtin.uri:
+        url: http://localhost:8080
+        status_code: 200
+        timeout: 5
+      register: jenkins_service_status
+      # Keep trying for 5 mins in 5 sec intervals
+      retries: 60
+      delay: 5
+      until: >
+         'status' in jenkins_service_status and
+         jenkins_service_status['status'] == 200
