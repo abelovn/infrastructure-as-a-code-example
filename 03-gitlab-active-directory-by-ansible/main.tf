@@ -1,8 +1,8 @@
-data "yandex_compute_image" family_images_pdc {
+data "yandex_compute_image" family_images_windows {
   family = var.family_images_windows
 }
 
-data "yandex_compute_image" family_images_gitlab {
+data "yandex_compute_image" family_images_linux {
   family = var.family_images_linux
 }
 
@@ -29,7 +29,7 @@ resource "yandex_compute_instance" "active_directory" {
     initialize_params {
       size     = 60
       type     = "network-ssd"
-      image_id = data.yandex_compute_image.family_images_pdc.id
+      image_id = data.yandex_compute_image.family_images_windows.id
     }
   }
 
@@ -78,7 +78,7 @@ resource "yandex_compute_instance" "gitlab" {
     initialize_params {
       size     = 40
       type     = "network-ssd"
-      image_id = data.yandex_compute_image.family_images_gitlab.id
+      image_id = data.yandex_compute_image.family_images_linux.id
     }
   }
 

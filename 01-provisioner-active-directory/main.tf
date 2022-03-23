@@ -1,4 +1,4 @@
-data "yandex_compute_image" family_images_pdc {
+data "yandex_compute_image" family_images_windows {
   family = var.family_images_windows
 }
 
@@ -24,7 +24,7 @@ resource "yandex_compute_instance" "active_directory" {
     initialize_params {
       size     = var.disk_size
       type     = var.disk_type
-      image_id = data.yandex_compute_image.family_images_pdc.id
+      image_id = data.yandex_compute_image.family_images_windows.id
     }
   }
 
