@@ -2,6 +2,11 @@ data "yandex_compute_image" family_images_pdc {
   family = var.family_images_windows
 }
 
+data "yandex_compute_image" family_images_gitlab {
+  family = var.family_images_linux
+}
+
+
 data "template_file" "userdata_win" {
   template = file("user_data.tmpl")
   vars = {
@@ -56,14 +61,6 @@ resource "yandex_compute_instance" "active_directory" {
     ]
   }
 
-}
-
-data "yandex_compute_image" "ubuntu-20-04" {
-  family = "ubuntu-2004-lts"
-}
-
-data "yandex_compute_image" family_images_gitlab {
-  family = var.family_images_linux
 }
 
 resource "yandex_compute_instance" "gitlab" {
