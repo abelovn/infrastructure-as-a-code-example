@@ -1,5 +1,5 @@
 data "yandex_compute_image" family_images_pdc {
-  family = var.family_images_pdc
+  family = var.family_images_windows
 }
 
 data "template_file" "userdata_win" {

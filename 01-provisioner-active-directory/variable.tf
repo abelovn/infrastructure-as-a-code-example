@@ -19,9 +19,9 @@ variable "yc_zone" {
   default     = "ru-central1-c"
 }
 
-variable "family_images_pdc" {
+variable "family_images_windows" {
   type        = string
-  description = "Family of images pdc in Yandex Cloud. Example: windows-2022-dc-gvlk, windows-2019-dc-gvlk"
+  description = "Family of images windows in Yandex Cloud. Example: windows-2022-dc-gvlk, windows-2019-dc-gvlk"
 }
 
 variable "cores" {
