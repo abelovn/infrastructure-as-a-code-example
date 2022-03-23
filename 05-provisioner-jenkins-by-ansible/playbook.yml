@@ -50,7 +50,7 @@
         user: admin
         password: "{{ adminpwd.stdout }}"
 
-    - name: Install Plugins on behalf of jenkins user "admin"
+    - name: Install default plugins when choice 'install suggested plugins'
       jenkins_plugin:
         name: "{{ item.key }}"
         url: http://{{ ansible_ssh_host }}:8080
