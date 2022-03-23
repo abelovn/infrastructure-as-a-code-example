@@ -13,14 +13,6 @@
       shell: cat /var/lib/jenkins/secrets/initialAdminPassword
       register: adminpwd
 
-    - name: Print adminpwd var
-      debug:
-        var: adminpwd['stdout']
-
-    - name: Print ansible_ssh_host var
-      debug:
-        var: ansible_ssh_host
-
     - name: unlock and add admin user
       jenkins_script:
         script: |
@@ -52,32 +44,32 @@
 
     - name: Install default plugins when choice 'install suggested plugins'
       jenkins_plugin:
-        name: "{{ item.key }}"
+        name: "{{ item }}"
         url: http://{{ ansible_ssh_host }}:8080
         url_username: "admin"
         url_password: "{{ adminpwd['stdout'] }}"
       register: plugin_result
       until: plugin_result is success
-      with_items: # no version = latest
-        - { key: "cloudbees-folder"}
-        - { key: "antisamy-markup-formatter"}
-        - { key: "build-timeout"}
-        - { key: "credentials-binding"}
-        - { key: "timestamper"}
-        - { key: "ws-cleanup"}
-        - { key: "ant"}
-        - { key: "gradle"}
-        - { key: "workflow-aggregator"}
-        - { key: "github-branch-source"}
-        - { key: "pipeline-github-lib"}
-        - { key: "pipeline-stage-view"}
-        - { key: "git"}
-        - { key: "ssh-slaves"}
-        - { key: "matrix-auth"}
-        - { key: "pam-auth"}
-        - { key: "ldap"}
-        - { key: "email-ext"}
-        - { key: "mailer"}
+      loop:
+        - cloudbees-folder
+        - antisamy-markup-formatter
+        - build-timeout
+        - credentials-binding
+        - timestamper
+        - ws-cleanup
+        - ant
+        - gradle
+        - workflow-aggregator
+        - github-branch-source
+        - pipeline-github-lib
+        - pipeline-stage-view
+        - git
+        - ssh-slaves
+        - matrix-auth
+        - pam-auth
+        - ldap
+        - email-ext
+        - mailer
 
     - name: Restart Jenkins
       ansible.builtin.service:
@@ -94,10 +86,10 @@
       delay: 5
       until: result.status == 403 or result.status == 200
 
-    - name: get initialAdminPassword
-      shell: cat /var/lib/jenkins/secrets/initialAdminPassword
-      register: adminpwd2
-
-    - name: Print adminpwd2 var
+    - name: Print adminpwd var
       debug:
-        var: adminpwd2['stdout']
+        var: adminpwd['stdout']
+
+    - name: Print ansible_ssh_host var
+      debug:
+        var: ansible_ssh_host
