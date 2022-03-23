@@ -89,12 +89,10 @@
         url: http://{{ ansible_ssh_host }}:8080
         status_code: 200,403
         timeout: 5
-      register: jenkins_service_status
+      register: result
       retries: 60
       delay: 5
-      until: >
-         'status' in jenkins_service_status and
-         jenkins_service_status['status'] == 200
+      until: result.status == 403 or result.status == 200
 
     - name: get initialAdminPassword
       shell: cat /var/lib/jenkins/secrets/initialAdminPassword
