@@ -53,10 +53,53 @@
     - name: Install Plugins on behalf of jenkins user "admin"
       jenkins_plugin:
         name: "{{ item.key }}"
-        url: http://localhost:8080
+        url: http://{{ ansible_ssh_host }}:8080
         url_username: "admin"
         url_password: "{{ adminpwd['stdout'] }}"
       register: plugin_result
       until: plugin_result is success
       with_items: # no version = latest
         - { key: "cloudbees-folder"}
+        - { key: "antisamy-markup-formatter"}
+        - { key: "build-timeout"}
+        - { key: "credentials-binding"}
+        - { key: "timestamper"}
+        - { key: "ws-cleanup"}
+        - { key: "ant"}
+        - { key: "gradle"}
+        - { key: "workflow-aggregator"}
+        - { key: "github-branch-source"}
+        - { key: "pipeline-github-lib"}
+        - { key: "pipeline-stage-view"}
+        - { key: "git"}
+        - { key: "ssh-slaves"}
+        - { key: "matrix-auth"}
+        - { key: "pam-auth"}
+        - { key: "ldap"}
+        - { key: "email-ext"}
+        - { key: "mailer"}
+
+    - name: Restart Jenkins
+      ansible.builtin.service:
+        name: jenkins
+        state: restarted
+
+    - name: Wait for Jenkins to start up
+      ansible.builtin.uri:
+        url: http://{{ ansible_ssh_host }}:8080
+        status_code: 200,403
+        timeout: 5
+      register: jenkins_service_status
+      retries: 60
+      delay: 5
+      until: >
+         'status' in jenkins_service_status and
+         jenkins_service_status['status'] == 200
+
+    - name: get initialAdminPassword
+      shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+      register: adminpwd2
+
+    - name: Print adminpwd2 var
+      debug:
+        var: adminpwd2['stdout']
