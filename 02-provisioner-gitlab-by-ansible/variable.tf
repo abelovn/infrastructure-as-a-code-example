@@ -19,6 +19,31 @@ variable "yc_zone" {
   default     = "ru-central1-c"
 }
 
+variable "family_images_gitlab" {
+  type        = string
+  description = "Family of images gitlab in Yandex Cloud. Example: windows-2022-dc-gvlk, ubuntu-2004-lts"
+}
+
+variable "cores" {
+  type        = string
+  description = "Cores CPU. Examples: 2, 4, 6, 8 and more"
+}
+
+variable "memory" {
+  type        = string
+  description = "Memory GB. Examples: 2, 4, 6, 8 and more"
+}
+
+variable "disk_size" {
+  type        = string
+  description = "Disk size GB. Min 50 for Windows."
+}
+
+variable "disk_type" {
+  type        = string
+  description = "Disk type. Examples: network-ssd, network-hdd"
+}
+
 variable "hostname" {
   type        = string
   description = "hostname"

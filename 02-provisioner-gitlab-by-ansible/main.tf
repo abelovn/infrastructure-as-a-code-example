@@ -1,5 +1,5 @@
-data "yandex_compute_image" "ubuntu-20-04" {
-  family = "ubuntu-2004-lts"
+data "yandex_compute_image" family_images {
+  family = var.family_images_gitlab
 }
 
 resource "yandex_compute_instance" "gitlab" {
@@ -9,15 +9,15 @@ resource "yandex_compute_instance" "gitlab" {
   hostname    = var.hostname
 
   resources {
-    cores  = 2
-    memory = 8
+    cores  = var.cores
+    memory = var.memory
   }
 
   boot_disk {
     initialize_params {
-      size     = 20
-      type     = "network-ssd"
-      image_id = data.yandex_compute_image.ubuntu-20-04.id
+      size     = var.disk_size
+      type     = var.disk_type
+      image_id = data.yandex_compute_image.family_images.id
     }
   }
 
