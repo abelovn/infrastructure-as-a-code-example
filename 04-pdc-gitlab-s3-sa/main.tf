@@ -143,11 +143,13 @@ data "template_file" "host_ini" {
     pdc_domain_path       = var.pdc_domain_path
     public_ip_pdc         = yandex_compute_instance.active_directory.network_interface.0.nat_ip_address
     gitlab_hostname       = var.gitlab_hostname
-    gitlab_external_url   = var.gitlab_external_url
     public_ip_gitlab      = yandex_compute_instance.gitlab.network_interface.0.nat_ip_address
     letsencrypt_domain    = var.letsencrypt_domain
     pswd_gitlab_ldap_sync = var.pswd_gitlab_ldap_sync
     pswd_test_user_in_pdc = var.pswd_test_user_in_pdc
+    aws_access_key_id     = yandex_storage_bucket.gitlab-backup-anton-patsev.access_key
+    aws_secret_access_key = yandex_storage_bucket.gitlab-backup-anton-patsev.secret_key
+    gitlab_backup_bucket_name = "gitlab-backup-anton-patsev"
     
   }
 }
@@ -166,11 +168,13 @@ data "template_file" "inventory_yml" {
     pdc_domain_path       = var.pdc_domain_path
     public_ip_pdc         = yandex_compute_instance.active_directory.network_interface.0.nat_ip_address
     gitlab_hostname       = var.gitlab_hostname
-    gitlab_external_url   = var.gitlab_external_url
     public_ip_gitlab      = yandex_compute_instance.gitlab.network_interface.0.nat_ip_address
     letsencrypt_domain    = var.letsencrypt_domain
     pswd_gitlab_ldap_sync = var.pswd_gitlab_ldap_sync
     pswd_test_user_in_pdc = var.pswd_test_user_in_pdc
+    aws_access_key_id     = yandex_storage_bucket.gitlab-backup-anton-patsev.access_key
+    aws_secret_access_key = yandex_storage_bucket.gitlab-backup-anton-patsev.secret_key
+    gitlab_backup_bucket_name = "gitlab-backup-anton-patsev"
     
   }
 }

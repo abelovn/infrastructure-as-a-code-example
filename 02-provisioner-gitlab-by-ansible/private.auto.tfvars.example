@@ -8,5 +8,4 @@ memory              = "4" # Examples: 2, 4, 6, 8 and more
 disk_size           = "20" # Min 50 for Windows
 disk_type           = "network-ssd" # Examples: network-ssd, network-hdd
 hostname            = "gitlab"
-gitlab_external_url = ""
 domain              = "sslip.io"

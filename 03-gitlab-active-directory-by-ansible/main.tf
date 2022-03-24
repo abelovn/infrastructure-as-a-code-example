@@ -144,7 +144,6 @@ data "template_file" "host_ini" {
     pdc_domain_path       = var.pdc_domain_path
     public_ip_pdc         = yandex_compute_instance.active_directory.network_interface.0.nat_ip_address
     gitlab_hostname       = var.gitlab_hostname
-    gitlab_external_url   = var.gitlab_external_url
     public_ip_gitlab      = yandex_compute_instance.gitlab.network_interface.0.nat_ip_address
     letsencrypt_domain    = var.letsencrypt_domain
     pswd_gitlab_ldap_sync = var.pswd_gitlab_ldap_sync
@@ -167,7 +166,6 @@ data "template_file" "inventory_yml" {
     pdc_domain_path       = var.pdc_domain_path
     public_ip_pdc         = yandex_compute_instance.active_directory.network_interface.0.nat_ip_address
     gitlab_hostname       = var.gitlab_hostname
-    gitlab_external_url   = var.gitlab_external_url
     public_ip_gitlab      = yandex_compute_instance.gitlab.network_interface.0.nat_ip_address
     letsencrypt_domain    = var.letsencrypt_domain
     pswd_gitlab_ldap_sync = var.pswd_gitlab_ldap_sync

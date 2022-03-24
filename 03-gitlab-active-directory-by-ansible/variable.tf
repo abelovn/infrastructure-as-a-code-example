@@ -54,11 +54,6 @@ variable "pdc_domain_path" {
   description = "pdc_domain_path"
 }
 
-variable "gitlab_external_url" {
-  type        = string
-  description = "gitlab_external_url"
-}
-
 variable "letsencrypt_domain" {
   type        = string
   description = "letsencrypt_domain"

@@ -49,11 +49,6 @@ variable "hostname" {
   description = "hostname"
 }
 
-variable "gitlab_external_url" {
-  type        = string
-  description = "gitlab_external_url"
-}
-
 variable "domain" {
   type        = string
   description = "domain"
