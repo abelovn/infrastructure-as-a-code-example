@@ -76,15 +76,15 @@
         name: jenkins
         state: restarted
 
-    - name: Wait for Jenkins to start up # check login
+    - name: Check Jenkins work (Get Jenkins Crumb).
       ansible.builtin.uri:
-        url: http://localhost:8080
-        status_code: 200,403
-        timeout: 5
-      register: result
-      retries: 60
-      delay: 5
-      until: result.status == 403 or result.status == 200
+        force_basic_auth: yes
+        url_username:     "admin"
+        url_password:     "{{ adminpwd.stdout }}"
+        url:              http://localhost:8080/crumbIssuer/api/json
+        return_content:   yes
+      retries:            10
+      delay:              5
 
     - name: Print adminpwd var
       debug:
