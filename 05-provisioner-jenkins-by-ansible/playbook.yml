@@ -45,7 +45,7 @@
     - name: Install default plugins when choice 'install suggested plugins'
       jenkins_plugin:
         name: "{{ item }}"
-        url: http://localhost:8080 # check localhost
+        url: http://localhost:8080
         url_username: "admin"
         url_password: "{{ adminpwd['stdout'] }}"
       register: plugin_result
@@ -78,8 +78,7 @@
 
     - name: Wait for Jenkins to start up # check login
       ansible.builtin.uri:
-        url: http://localhost:8080 # check localhost
-        status_code: 200,403
+        url: http://localhost:8080
         timeout: 5
       register: result
       retries: 60
