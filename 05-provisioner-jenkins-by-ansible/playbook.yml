@@ -79,6 +79,7 @@
     - name: Wait for Jenkins to start up # check login
       ansible.builtin.uri:
         url: http://localhost:8080
+        status_code: 200,403
         timeout: 5
       register: result
       retries: 60
