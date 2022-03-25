@@ -67,7 +67,7 @@ resource "yandex_vpc_subnet" "subnet-pdc-01" {
   name           = "subnet-pdc-01"
   zone           = "ru-central1-c"
   network_id     = yandex_vpc_network.network-pdc-01.id
-  v4_cidr_blocks = ["192.168.10.0/24"]
+  v4_cidr_blocks = ["192.168.1.0/24"]
 }
 
 # Output values
