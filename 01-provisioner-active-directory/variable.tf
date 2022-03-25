@@ -44,14 +44,14 @@ variable "disk_type" {
   description = "Disk type. Examples: network-ssd, network-hdd"
 }
 
-variable "windows_password" {
+variable "pdc_admin_password" {
   type        = string
   description = "Password for Windows"
 }
 
-variable "hostname" {
+variable "pdc_hostname" {
   type        = string
-  description = "hostname"
+  description = "pdc_hostname"
 }
 
 variable "pdc_domain" {

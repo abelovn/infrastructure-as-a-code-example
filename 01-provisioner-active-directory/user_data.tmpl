@@ -1,5 +1,5 @@
 <powershell>
-net user Administrator "${windows_password}"
+net user Administrator "${pdc_admin_password}"
 $chocoInstallScriptUrl  = 'https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1'
 $chocoInstallScript     = Join-Path $env:Temp 'SetupComplete.ps1'
 

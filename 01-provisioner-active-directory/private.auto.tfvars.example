@@ -7,7 +7,7 @@ cores            = "2" # Examples: 2, 4, 6, 8 and more
 memory           = "2" # Examples: 2, 4, 6, 8 and more
 disk_size        = "50" # Min 50 for Windows
 disk_type        = "network-ssd" # Examples: network-ssd, network-hdd
-windows_password = ""
-hostname         = "dc2022"
+pdc_admin_password = ""
+pdc_hostname         = "dc2022"
 pdc_domain       = "domain.test"
 pdc_domain_path  = "dc=domain,dc=test"

@@ -5,7 +5,7 @@ data "yandex_compute_image" family_images_windows {
 data "template_file" "userdata_win" {
   template = file("user_data.tmpl")
   vars = {
-    windows_password = var.windows_password
+    pdc_admin_password = var.pdc_admin_password
   }
 }
 
@@ -13,7 +13,7 @@ resource "yandex_compute_instance" "active_directory" {
 
   name        = "active-directory"
   platform_id = "standard-v3"
-  hostname    = var.hostname
+  hostname    = var.pdc_hostname
   service_account_id = yandex_iam_service_account.sa-compute-admin.id
 
   resources {
@@ -44,7 +44,7 @@ resource "yandex_compute_instance" "active_directory" {
       type     = "winrm"
       user     = "Administrator"
       host     = self.network_interface.0.nat_ip_address
-      password = var.windows_password
+      password = var.pdc_admin_password
       https    = true
       port     = 5986
       insecure = true
@@ -84,8 +84,8 @@ resource "local_file" "host_ini" {
 data "template_file" "host_ini" {
   template = file("host_ini.tmpl")
   vars = {
-    windows_password = var.windows_password
-    hostname         = var.hostname
+    pdc_admin_password = var.pdc_admin_password
+    pdc_hostname         = var.pdc_hostname
     pdc_domain       = var.pdc_domain
     pdc_domain_path  = var.pdc_domain_path
     public_ip        = yandex_compute_instance.active_directory.network_interface.0.nat_ip_address
@@ -100,8 +100,8 @@ resource "local_file" "inventory_yml" {
 data "template_file" "inventory_yml" {
   template = file("inventory_yml.tmpl")
   vars = {
-    windows_password = var.windows_password
-    hostname         = var.hostname
+    pdc_admin_password = var.pdc_admin_password
+    pdc_hostname         = var.pdc_hostname
     pdc_domain       = var.pdc_domain
     pdc_domain_path  = var.pdc_domain_path
     public_ip        = yandex_compute_instance.active_directory.network_interface.0.nat_ip_address

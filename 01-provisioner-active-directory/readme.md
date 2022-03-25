@@ -31,10 +31,14 @@ yc_cloud_id, yc_folder_id.
 
 Укажите yc_zone - avalability zone по умолчанию.
 
-Укажите windows_password как пароль локального Administrator Windows. 
+Укажите pdc_admin_password как пароль локального Administrator Windows. 
 
-Укажите hostname как имя сервера.
+Укажите pdc_hostname как имя сервера.
 
 Укажите название домена pdc_domain, например "ad.domain.test".
 
 Укажите pdc_domain_path, например "dc=ad,dc=domain,dc=test".
+
+
+### Условные обозначения
+pdc - primarydomaincontroller
