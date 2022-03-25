@@ -7,3 +7,11 @@
       changed_when: false
   roles:
     - role: robertdebock.gitlab
+  post_tasks:
+    - name: Get initial_root_password
+      command: cat /etc/gitlab/initial_root_password | grep Password
+      register: initial_root_password
+
+    - name: Print to console initial_root_password
+      debug:
+        msg: "{{initial_root_password.stdout}}"
