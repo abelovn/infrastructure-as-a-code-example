@@ -1,4 +1,4 @@
-data "yandex_compute_image" family_images_windows {
+data "yandex_compute_image" "family_images_windows" {
   family = var.family_images_windows
 }
 
@@ -11,9 +11,9 @@ data "template_file" "userdata_win" {
 
 resource "yandex_compute_instance" "active_directory" {
 
-  name        = "active-directory"
-  platform_id = "standard-v3"
-  hostname    = var.pdc_hostname
+  name               = "active-directory"
+  platform_id        = "standard-v3"
+  hostname           = var.pdc_hostname
   service_account_id = yandex_iam_service_account.sa-compute-admin.id
 
   resources {
@@ -85,10 +85,10 @@ data "template_file" "host_ini" {
   template = file("host_ini.tmpl")
   vars = {
     pdc_admin_password = var.pdc_admin_password
-    pdc_hostname         = var.pdc_hostname
-    pdc_domain       = var.pdc_domain
-    pdc_domain_path  = var.pdc_domain_path
-    public_ip        = yandex_compute_instance.active_directory.network_interface.0.nat_ip_address
+    pdc_hostname       = var.pdc_hostname
+    pdc_domain         = var.pdc_domain
+    pdc_domain_path    = var.pdc_domain_path
+    public_ip          = yandex_compute_instance.active_directory.network_interface.0.nat_ip_address
   }
 }
 
@@ -101,10 +101,10 @@ data "template_file" "inventory_yml" {
   template = file("inventory_yml.tmpl")
   vars = {
     pdc_admin_password = var.pdc_admin_password
-    pdc_hostname         = var.pdc_hostname
-    pdc_domain       = var.pdc_domain
-    pdc_domain_path  = var.pdc_domain_path
-    public_ip        = yandex_compute_instance.active_directory.network_interface.0.nat_ip_address
+    pdc_hostname       = var.pdc_hostname
+    pdc_domain         = var.pdc_domain
+    pdc_domain_path    = var.pdc_domain_path
+    public_ip          = yandex_compute_instance.active_directory.network_interface.0.nat_ip_address
   }
 }
 
