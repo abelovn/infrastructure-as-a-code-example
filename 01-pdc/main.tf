@@ -30,7 +30,7 @@ resource "yandex_compute_instance" "active_directory" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.subnet-1.id
+    subnet_id = yandex_vpc_subnet.subnet-pdc-01.id
     nat       = true
   }
 
@@ -63,8 +63,8 @@ resource "yandex_vpc_network" "network-1" {
   name = "network1"
 }
 
-resource "yandex_vpc_subnet" "subnet-1" {
-  name           = "subnet1"
+resource "yandex_vpc_subnet" "subnet-pdc-01" {
+  name           = "subnet-pdc-01"
   zone           = "ru-central1-c"
   network_id     = yandex_vpc_network.network-1.id
   v4_cidr_blocks = ["192.168.10.0/24"]
