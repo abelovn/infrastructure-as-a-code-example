@@ -44,9 +44,9 @@ variable "disk_type" {
   description = "Disk type. Examples: network-ssd, network-hdd"
 }
 
-variable "hostname" {
+variable "gitlab_hostname" {
   type        = string
-  description = "hostname"
+  description = "gitlab_hostname"
 }
 
 variable "domain" {
