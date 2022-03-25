@@ -1,12 +1,12 @@
-data "yandex_compute_image" family_images_linux {
+data "yandex_compute_image" "family_images_linux" {
   family = var.family_images_linux
 }
 
 resource "yandex_compute_instance" "gitlab" {
 
-  name        = "gitlab"
-  platform_id = "standard-v3"
-  hostname    = var.hostname
+  name               = "gitlab"
+  platform_id        = "standard-v3"
+  hostname           = var.hostname
   service_account_id = yandex_iam_service_account.sa-compute-admin.id
 
   resources {
@@ -71,9 +71,9 @@ resource "local_file" "host_ini" {
 data "template_file" "host_ini" {
   template = file("host_ini.tmpl")
   vars = {
-    hostname            = var.hostname
-    public_ip           = yandex_compute_instance.gitlab.network_interface.0.nat_ip_address
-    domain              = var.domain
+    hostname  = var.hostname
+    public_ip = yandex_compute_instance.gitlab.network_interface.0.nat_ip_address
+    domain    = var.domain
   }
 }
 
@@ -85,8 +85,8 @@ resource "local_file" "inventory_yml" {
 data "template_file" "inventory_yml" {
   template = file("inventory_yml.tmpl")
   vars = {
-    hostname            = var.hostname
-    public_ip           = yandex_compute_instance.gitlab.network_interface.0.nat_ip_address
-    domain              = var.domain
+    hostname  = var.hostname
+    public_ip = yandex_compute_instance.gitlab.network_interface.0.nat_ip_address
+    domain    = var.domain
   }
 }
