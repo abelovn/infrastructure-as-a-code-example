@@ -59,14 +59,14 @@ resource "yandex_compute_instance" "active_directory" {
 
 }
 
-resource "yandex_vpc_network" "network-1" {
-  name = "network1"
+resource "yandex_vpc_network" "network-pdc-01" {
+  name = "network-pdc-01"
 }
 
 resource "yandex_vpc_subnet" "subnet-pdc-01" {
   name           = "subnet-pdc-01"
   zone           = "ru-central1-c"
-  network_id     = yandex_vpc_network.network-1.id
+  network_id     = yandex_vpc_network.network-pdc-01.id
   v4_cidr_blocks = ["192.168.10.0/24"]
 }
 
