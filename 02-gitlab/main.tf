@@ -23,7 +23,7 @@ resource "yandex_compute_instance" "gitlab" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.subnet-1.id
+    subnet_id = yandex_vpc_subnet.subnet-gitlab-02.id
     nat       = true
   }
 
@@ -46,15 +46,15 @@ resource "yandex_compute_instance" "gitlab" {
 
 }
 
-resource "yandex_vpc_network" "network-1" {
-  name = "network1"
+resource "yandex_vpc_network" "network-gitlab-02" {
+  name = "network-gitlab-02"
 }
 
-resource "yandex_vpc_subnet" "subnet-1" {
-  name           = "subnet1"
+resource "yandex_vpc_subnet" "subnet-gitlab-02" {
+  name           = "subnet-gitlab-02"
   zone           = "ru-central1-c"
-  network_id     = yandex_vpc_network.network-1.id
-  v4_cidr_blocks = ["192.168.10.0/24"]
+  network_id     = yandex_vpc_network.network-gitlab-02.id
+  v4_cidr_blocks = ["192.168.2.0/24"]
 }
 
 # Output values
