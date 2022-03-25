@@ -20,6 +20,7 @@ resource "yandex_compute_instance" "active_directory" {
   platform_id = "standard-v3"
   hostname    = var.pdc_hostname
   service_account_id = yandex_iam_service_account.sa-compute-admin.id
+  zone               = "ru-central1-b"
 
   resources {
     cores  = 2
@@ -70,6 +71,7 @@ resource "yandex_compute_instance" "gitlab" {
   platform_id = "standard-v3"
   hostname    = var.gitlab_hostname
   service_account_id = yandex_iam_service_account.sa-compute-admin.id
+  zone               = "ru-central1-b"
 
   resources {
     cores  = 2
@@ -114,7 +116,7 @@ resource "yandex_vpc_network" "network-1" {
 
 resource "yandex_vpc_subnet" "subnet-1" {
   name           = "subnet1"
-  zone           = "ru-central1-c"
+  zone           = "ru-central1-b"
   network_id     = yandex_vpc_network.network-1.id
   v4_cidr_blocks = ["192.168.10.0/24"]
 }

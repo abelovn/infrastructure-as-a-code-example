@@ -21,5 +21,5 @@ Output:
 token: xxx
 cloud-id: xxx
 folder-id: xxxx
-compute-default-zone: ru-central1-c
+compute-default-zone: ru-central1-b
 ```

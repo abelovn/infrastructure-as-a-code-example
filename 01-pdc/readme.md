@@ -22,7 +22,7 @@ Output:
 token: xxx
 cloud-id: xxx
 folder-id: xxxx
-compute-default-zone: ru-central1-c
+compute-default-zone: ru-central1-b
 ```
 
 ### Создайте private.auto.tfvars из примера private.auto.tfvars.example
