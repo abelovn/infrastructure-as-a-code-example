@@ -43,13 +43,3 @@ variable "disk_type" {
   type        = string
   description = "Disk type. Examples: network-ssd, network-hdd, network-ssd-nonreplicated"
 }
-
-variable "hostname" {
-  type        = string
-  description = "hostname"
-}
-
-variable "domain" {
-  type        = string
-  description = "domain"
-}

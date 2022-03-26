@@ -41,7 +41,7 @@ variable "disk_size" {
 
 variable "disk_type" {
   type        = string
-  description = "Disk type. Examples: network-ssd, network-hdd"
+  description = "Disk type. Examples: network-ssd, network-hdd, network-ssd-nonreplicated"
 }
 
 variable "pdc_admin_password" {
