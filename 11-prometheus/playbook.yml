@@ -1,0 +1,7 @@
+---
+- name: Install prometheus
+  hosts: prometheus
+  become: yes
+
+  roles:
+  - cloudalchemy.prometheus
