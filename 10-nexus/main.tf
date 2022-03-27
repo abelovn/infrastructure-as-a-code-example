@@ -2,9 +2,9 @@ data "yandex_compute_image" family_images_linux {
   family = var.family_images_linux
 }
 
-resource "yandex_compute_instance" "zabbix" {
+resource "yandex_compute_instance" "nexus" {
 
-  name        = "zabbix"
+  name        = "nexus"
   platform_id = "standard-v3"
   hostname    = var.hostname
   service_account_id = yandex_iam_service_account.sa-compute-admin.id
@@ -60,7 +60,7 @@ resource "yandex_vpc_subnet" "subnet-1" {
 # Output values
 output "public_ip" {
   description = "Public IP address for active directory"
-  value       = yandex_compute_instance.zabbix.network_interface.0.nat_ip_address
+  value       = yandex_compute_instance.nexus.network_interface.0.nat_ip_address
 }
 
 resource "local_file" "host_ini" {
@@ -72,7 +72,7 @@ data "template_file" "host_ini" {
   template = file("host_ini.tmpl")
   vars = {
     hostname            = var.hostname
-    public_ip           = yandex_compute_instance.zabbix.network_interface.0.nat_ip_address
+    public_ip           = yandex_compute_instance.nexus.network_interface.0.nat_ip_address
     domain              = var.domain
   }
 }
@@ -86,7 +86,7 @@ data "template_file" "inventory_yml" {
   template = file("inventory_yml.tmpl")
   vars = {
     hostname            = var.hostname
-    public_ip           = yandex_compute_instance.zabbix.network_interface.0.nat_ip_address
+    public_ip           = yandex_compute_instance.nexus.network_interface.0.nat_ip_address
     domain              = var.domain
   }
 }
