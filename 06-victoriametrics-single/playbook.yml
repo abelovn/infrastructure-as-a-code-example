@@ -1,5 +1,5 @@
 - hosts: victoriametrics
   become: yes
   roles:
-    - role: sorrowless.victoriametrics
+    - role: lotusnoir.apps_victoriametrics
 
