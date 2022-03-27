@@ -80,7 +80,7 @@ resource "local_file" "host_ini" {
   filename = "host.ini"
   content = <<-EOT
     %{ for node in yandex_compute_instance.victoriametrics_cluster ~}
-    ${ node.name } 
+    ${ node.name } ansible_host=${ yandex_compute_instance.victoriametrics_cluster.${ node.name }.network_interface.0.nat_ip_address }
     %{ endfor ~}
   EOT
 }
